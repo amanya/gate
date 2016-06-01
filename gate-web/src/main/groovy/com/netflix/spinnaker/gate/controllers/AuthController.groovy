@@ -61,6 +61,7 @@ class AuthController {
 
   @RequestMapping("/redirect")
   void redirect(HttpServletResponse response, @RequestParam String to) {
+    to = URLDecoder.decode(to, "UTF-8")
     validDeckRedirect(to) ?
         response.sendRedirect(to) :
         response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Requested redirect address not recognized.")
